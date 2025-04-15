@@ -1,6 +1,6 @@
 import { Link } from "lucide-react";
 import * as ScrollArea from "@radix-ui/react-scroll-area"
-import ButtonCSV from "./ui/ButtonCSV";
+import ButtonDownloadCSV from "./ui/ButtonDownloadCSV";
 import { LinkCard } from "./commons/LinkCard";
 
 interface Links {
@@ -18,7 +18,7 @@ export function MyLinks() {
 
       <div className="mb-[20px] flex flex-row justify-between">
         <h1 className="text-lg text-gray-600 font-bold">Meus links</h1>
-        <ButtonCSV disabled={isMyLinkListEmpty ? true : false}>Baixar CSV</ButtonCSV>
+        <ButtonDownloadCSV disabled={isMyLinkListEmpty ? true : false}>Baixar CSV</ButtonDownloadCSV>
       </div>
 
       <ScrollArea.Root type="scroll" className="overflow-hidden">

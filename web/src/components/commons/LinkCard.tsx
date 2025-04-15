@@ -1,3 +1,4 @@
+import { cn } from "../../lib/utils"
 import { Copy, Trash2 } from "lucide-react";
 
 export function LinkCard() {
@@ -13,8 +14,20 @@ export function LinkCard() {
 
       <div className='flex flex-row items-center mr-4'>
         <span className="text-sm text-gray-500 px-5">15 acessos</span>
-        <button className="gap-8 p-3 bg-gray-200 rounded-lg mx-1.5"><Copy size={16} /></button>
-        <button className="gap-8 p-3 bg-gray-200 rounded-lg"><Trash2 size={16} /></button>
+        <button className={cn(
+          `gap-8 p-3 bg-gray-200 rounded-lg mx-1.5
+          border-2 hover:border-blue-base
+          disabled:opacity-50 disabled:pointer-events-none
+          aria-disabeld:disabled:opacity-50 aria-disabled:pointer-events-none`
+        )}>
+          <Copy size={16} />
+        </button>
+        <button className={cn(
+          `gap-8 p-3 bg-gray-200 rounded-lg
+          border-2 hover:border-blue-base
+          disabled:opacity-50 disabled:pointer-events-none
+          aria-disabeld:disabled:opacity-50 aria-disabled:pointer-events-none`
+        )}><Trash2 size={16} /></button>
       </div>
 
     </div>

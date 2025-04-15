@@ -1,7 +1,7 @@
 import { cn } from "../../lib/utils"
 import { Download } from "lucide-react"
 
-export default function ButtonCSV({
+export default function ButtonDownloadCSV({
   children,
   ...props
 }: {
