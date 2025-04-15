@@ -9,7 +9,9 @@ export default function ButtonCSV({
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button {...props} className={cn(
-      `flex flex-row items-center justify-center p-2 gap-1.5 bg-gray-200 rounded-md`,
+      `flex flex-row items-center justify-center p-2 gap-1.5 bg-gray-200 rounded-md
+      border-2 hover:border-blue-base
+      disabled:opacity-50 disabled:pointer-events-none aria-disabeld:disabled:opacity-50 aria-disabled:pointer-events-none`,
       props.className
     )}>
       <span className="text-gray-600">

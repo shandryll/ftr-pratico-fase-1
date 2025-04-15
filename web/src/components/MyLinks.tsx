@@ -14,11 +14,11 @@ export function MyLinks() {
   const isMyLinkListEmpty = myLinksList.length === 1
 
   return (
-    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px]'>
+    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] h-[234px] max-h-[396px]'>
 
       <div className="mb-[20px] flex flex-row justify-between">
         <h1 className="text-lg text-gray-600 font-bold">Meus links</h1>
-        <ButtonCSV>Baixar CSV</ButtonCSV>
+        <ButtonCSV disabled={isMyLinkListEmpty ? true : false}>Baixar CSV</ButtonCSV>
       </div>
 
       <ScrollArea.Root type="scroll" className="overflow-hidden">
@@ -47,7 +47,7 @@ export function MyLinks() {
         </ScrollArea.Viewport>
 
         <ScrollArea.Scrollbar
-          className="flex touch-none select-none bg-gray-100 p-0.5 transition-colors duration-[160ms] ease-out data-[orientation=horizontal]:h-2 data-[orientation=vertical]:w-2 data-[orientation=horizontal]:flex-col"
+          className="flex touch-none select-none bg-gray-100 p-0.5 transition-colors duration-[160ms] ease-out data-[orientation=horizontal]:h-4 data-[orientation=vertical]:w-4 data-[orientation=horizontal]:flex-col"
           orientation="vertical"
         >
           <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-blue-base before:absolute before:left-1/2 before:top-1/2 before:size-full before:min-h-11 before:min-w-11 before:-translate-x-1/2 before:-translate-y-1/2" />
