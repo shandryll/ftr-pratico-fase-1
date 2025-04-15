@@ -14,7 +14,7 @@ export function MyLinks() {
   const isMyLinkListEmpty = myLinksList.length === 1
 
   return (
-    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] h-[234px] max-h-[396px]'>
+    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px]'>
 
       <div className="mb-[20px] flex flex-row justify-between">
         <h1 className="text-lg text-gray-600 font-bold">Meus links</h1>

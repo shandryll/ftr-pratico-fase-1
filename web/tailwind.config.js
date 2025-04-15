@@ -24,11 +24,8 @@ export default {
         "danger": "#B12C4D",
       },
       screens: {
-        xs: '576px',
-        sm: '768px',
+        sm: '390px',
         md: '992px',
-        lg: '1200px',
-        xl: '1400px',
       },
     },
   },
