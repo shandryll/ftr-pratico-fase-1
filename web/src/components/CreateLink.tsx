@@ -3,7 +3,7 @@ import TextInput from "./ui/TextInput";
 
 export function CreateLink() {
   return (
-    <div className="bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[380px]">
+    <div className="bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[380px] max-h-[360px]">
 
       <div className="pb-[1.5rem]">
         <h1 className="text-lg text-gray-600 font-bold">Novo link</h1>
