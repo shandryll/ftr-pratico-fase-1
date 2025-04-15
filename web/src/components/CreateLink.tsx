@@ -19,7 +19,7 @@ export function CreateLink() {
         <TextInput defaultValue="brev.ly/" className="text-gray-400" />
       </div>
 
-      <Button className="text-base text-white">Salvar link</Button>
+      <Button className="text-md text-white">Salvar link</Button>
     </div>
   )
 }

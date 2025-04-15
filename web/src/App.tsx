@@ -4,7 +4,7 @@ import { MyLinks } from "./components/MyLinks"
 
 export function App() {
   return (
-    <main className="max-w-7xl mx-auto">
+    <main className="max-w-7xl mx-auto px-28">
       <Header />
 
       <div className="flex flex-row justify-between">

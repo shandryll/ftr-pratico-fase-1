@@ -10,7 +10,7 @@ export default function Button({
     <button
       {...props}
       className={cn(
-        "bg-blue-base gap-3 p-[1.25rem] text-base font-bold text-white rounded-xl",
+        "bg-blue-base gap-3 p-[1.25rem] text-md font-bold text-white rounded-xl",
         props.className
       )}
     >
