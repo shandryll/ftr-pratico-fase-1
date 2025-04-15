@@ -14,7 +14,7 @@ export function MyLinks() {
   const isMyLinkListEmpty = myLinksList.length === 1
 
   return (
-    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px]'>
+    <div className='bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px] max-sm:w-screen max-sm:h-screen'>
 
       <div className="mb-[20px] flex flex-row justify-between">
         <h1 className="text-lg text-gray-600 font-bold">Meus links</h1>
@@ -22,7 +22,7 @@ export function MyLinks() {
       </div>
 
       <ScrollArea.Root type="scroll" className="overflow-hidden">
-        <ScrollArea.Viewport className="h-[396px]" >
+        <ScrollArea.Viewport className="h-full">
           {isMyLinkListEmpty ? (
             <div className="flex flex-col w-[516px] border-t border-gray-200">
               <div className="flex flex-col items-center justify-center mt-10">
@@ -41,6 +41,10 @@ export function MyLinks() {
               <LinkCard />
               <LinkCard />
               <LinkCard />
+              <LinkCard />
+              <LinkCard />
+              <LinkCard />
+
             </div>
           )}
 

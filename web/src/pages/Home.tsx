@@ -7,7 +7,7 @@ export function Home() {
     <>
       <Header />
 
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between max-sm:flex-col">
         <CreateLink />
         <MyLinks />
       </div>

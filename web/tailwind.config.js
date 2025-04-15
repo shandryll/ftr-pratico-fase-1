@@ -23,10 +23,6 @@ export default {
         "blue-dark": "#2C4091",
         "danger": "#B12C4D",
       },
-      screens: {
-        sm: '390px',
-        md: '992px',
-      },
     },
   },
   plugins: [],

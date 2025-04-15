@@ -4,10 +4,10 @@ import { LinkRedirect } from "./pages/LinkRedirect"
 
 export function App() {
   return (
-    <main className="max-w-7xl mx-auto px-28">
-      {/* <Home /> */}
+    <main className="max-w-7xl mx-auto px-28 min-h-screen">
+      <Home />
       {/* <LinkRedirect /> */}
-      <LinkNotFound />
+      {/* <LinkNotFound /> */}
     </main>
   )
 }

@@ -2,7 +2,7 @@ export function LinkRedirect() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-gray-100 flex flex-col justify-center items-center rounded-md
-        w-[580px] h-[296px] sm:px-5 sm:py-12">
+        w-[580px] h-[296px] max-sm:px-5 max-sm:py-12">
         <img src="src/assets/svg/Logo_Icon.svg" alt="Logo Icon" />
 
         <p className="text-xl text-gray-600 font-bold my-6">Redirecionando...</p>
