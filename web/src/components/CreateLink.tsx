@@ -10,13 +10,11 @@ export function CreateLink() {
       </div>
 
       <div className="mb-[0.5rem]">
-        <span className="text-xs text-gray-500 uppercase">link original</span>
-        <TextInput placeholder="www.exemplo.com.br" />
+        <TextInput name="link original" placeholder="www.exemplo.com.br" />
       </div>
 
       <div className="mb-[1.5rem]">
-        <span className="text-xs text-gray-500 uppercase">link encurtado</span>
-        <TextInput defaultValue="brev.ly/" className="text-gray-400" />
+        <TextInput name="link encurtado" defaultValue="brev.ly/" className="text-gray-400" />
       </div>
 
       <Button className="text-md text-white">Salvar link</Button>
