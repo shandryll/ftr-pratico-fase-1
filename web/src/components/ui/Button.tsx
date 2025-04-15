@@ -10,7 +10,7 @@ export default function Button({
     <button
       {...props}
       className={cn(
-        "bg-blue-base p-[1.25rem] text-white rounded-xl font-bold whitespace-nowrap hover:opacity-95 disabled:opacity-70",
+        "bg-blue-base gap-3 p-[1.25rem] text-base font-bold text-white rounded-xl",
         props.className
       )}
     >
