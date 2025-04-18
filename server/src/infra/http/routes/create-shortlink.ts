@@ -1,4 +1,6 @@
+import { createShortlink } from '@/app/use-cases/create-shortlink'
 import type { FastifyInstance } from 'fastify'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
@@ -16,7 +18,7 @@ export const createShortlinkRoute: FastifyPluginAsyncZod = async (
         }),
         response: {
           201: z
-            .object({ shortenedUrl: z.string() })
+            .object({ remoteKey: z.string() })
             .describe('Shortlink create successfully.'),
           409: z
             .object({ message: z.string() })
@@ -24,8 +26,30 @@ export const createShortlinkRoute: FastifyPluginAsyncZod = async (
         },
       },
     },
-    async (request, reply) => {
-      return reply.status(201).send({ shortenedUrl: 'brev.ly/shandryll' })
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const createShortlinkBodySchema = z.object({
+        originalUrl: z.string(),
+        shortenedUrl: z.string(),
+      })
+
+      const { originalUrl, shortenedUrl } = createShortlinkBodySchema.parse(
+        request.body
+      )
+
+      await createShortlink({
+        originalUrl,
+        shortenedUrl,
+      })
+
+      return reply.status(201).send({ remoteKey: 'brev.ly/shandryll' })
     }
   )
 }
+
+// await db.insert(schema.shortlinks).values({
+//   originalUrl: 'http://google.com/shandryll',
+//   shortenedUrl: 'http://brev.ly/shandryll',
+//   accessCounter: 0,
+//   remoteKey: 'http://brev.ly/shandryll',
+//   remoteUrl: 'http://s3.com/fsdfha290h9fh2nc20c',
+// })
