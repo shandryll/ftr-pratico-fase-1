@@ -1,4 +1,4 @@
-import { createShortlink } from '@/app/use-cases/create-shortlink'
+import { createShortlink } from '@/use-cases/create-shortlink'
 import type { FastifyInstance } from 'fastify'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
@@ -18,7 +18,7 @@ export const createShortlinkRoute: FastifyPluginAsyncZod = async (
         }),
         response: {
           201: z
-            .object({ remoteKey: z.string() })
+            .object({ shortenedUrl: z.string() })
             .describe('Shortlink create successfully.'),
           409: z
             .object({ message: z.string() })
@@ -41,7 +41,7 @@ export const createShortlinkRoute: FastifyPluginAsyncZod = async (
         shortenedUrl,
       })
 
-      return reply.status(201).send({ remoteKey: 'brev.ly/shandryll' })
+      return reply.status(201).send({ shortenedUrl: 'brev.ly/shandryll' })
     }
   )
 }
@@ -50,6 +50,4 @@ export const createShortlinkRoute: FastifyPluginAsyncZod = async (
 //   originalUrl: 'http://google.com/shandryll',
 //   shortenedUrl: 'http://brev.ly/shandryll',
 //   accessCounter: 0,
-//   remoteKey: 'http://brev.ly/shandryll',
-//   remoteUrl: 'http://s3.com/fsdfha290h9fh2nc20c',
 // })

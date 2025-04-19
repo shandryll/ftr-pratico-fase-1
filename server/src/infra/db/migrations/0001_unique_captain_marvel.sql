@@ -1,1 +1,0 @@
-ALTER TABLE "shortlinks" ALTER COLUMN "access_counter" SET DEFAULT 0;

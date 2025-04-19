@@ -1,3 +1,5 @@
+import { registerRoutes } from '@/http/routes'
+import { logger } from '@/log/logger'
 import { fastifyCors } from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
@@ -8,14 +10,13 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
-import { registerRoutes } from './routes/index'
 
-const server = fastify()
+export const app = fastify()
 
-server.setValidatorCompiler(validatorCompiler)
-server.setSerializerCompiler(serializerCompiler)
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
-server.setErrorHandler((error, request, reply) => {
+app.setErrorHandler((error, _, reply) => {
   if (hasZodFastifySchemaValidationErrors(error)) {
     return reply.status(400).send({
       message: 'Validation error',
@@ -23,26 +24,22 @@ server.setErrorHandler((error, request, reply) => {
     })
   }
 
-  console.error(error)
+  logger.error(error)
   return reply.status(500).send({ message: 'Internal server error.' })
 })
 
-server.register(fastifyCors, { origin: '*' })
-server.register(fastifySwagger, {
+app.register(fastifyCors, { origin: '*' })
+app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: 'Brev.ly Server',
+      title: 'Brev.ly app',
       version: '1.0.0',
     },
   },
   transform: jsonSchemaTransform,
 })
-server.register(fastifySwaggerUi, {
+app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
 
-registerRoutes(server)
-
-server.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
-  console.log('🚀 HTTP server running!')
-})
+registerRoutes(app)
