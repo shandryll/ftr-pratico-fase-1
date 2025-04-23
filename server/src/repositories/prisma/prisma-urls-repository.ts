@@ -3,6 +3,16 @@ import type { Prisma } from '@prisma/client'
 import type { IUrlsRepository } from '../urls-repository'
 
 export class PrismaUrlsRepository implements IUrlsRepository {
+  async findById(urlId: string) {
+    const url = await prisma.url.findUnique({
+      where: {
+        id: urlId,
+      },
+    })
+
+    return url
+  }
+
   async findByShortenedUrl(shortenedUrl: string) {
     const url = await prisma.url.findUnique({
       where: {
@@ -19,5 +29,13 @@ export class PrismaUrlsRepository implements IUrlsRepository {
     })
 
     return url
+  }
+
+  async delete(urlId: string) {
+    await prisma.url.delete({
+      where: {
+        id: urlId,
+      },
+    })
   }
 }

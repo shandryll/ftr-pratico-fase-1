@@ -5,6 +5,16 @@ import type { IUrlsRepository } from '../urls-repository'
 export class InMemoryUrlsRepository implements IUrlsRepository {
   public urls: Url[] = []
 
+  async findById(urlId: string) {
+    const url = this.urls.find(url => url.id === urlId)
+
+    if (!url) {
+      return null
+    }
+
+    return url
+  }
+
   async findByShortenedUrl(shortenedUrl: string) {
     const url = this.urls.find(url => url.shortenedUrl === shortenedUrl)
 
@@ -27,5 +37,15 @@ export class InMemoryUrlsRepository implements IUrlsRepository {
     this.urls.push(url)
 
     return url
+  }
+
+  async delete(urlId: string) {
+    const urlIndex = this.urls.findIndex(url => url.id === urlId)
+
+    if (urlIndex === -1) {
+      return null
+    }
+
+    this.urls.splice(urlIndex, 1)
   }
 }
