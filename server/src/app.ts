@@ -1,5 +1,7 @@
 import { logger } from '@/log/logger'
 import { fastifyCors } from '@fastify/cors'
+import fastifySwagger from '@fastify/swagger'
+import scalarUI from '@scalar/fastify-api-reference'
 import { fastify } from 'fastify'
 import {
   hasZodFastifySchemaValidationErrors,
@@ -27,4 +29,4 @@ app.setErrorHandler((error, _, reply) => {
 
 app.register(fastifyCors, { origin: '*' })
 
-app.register(urlsRoutes)
+app.register(urlsRoutes, { prefix: '/v1/urls' })
