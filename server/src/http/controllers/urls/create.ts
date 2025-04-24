@@ -4,7 +4,7 @@ import { makeCreateUrlUseCase } from '@/use-cases/factories/make-create-url-use-
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function create(request: FastifyRequest, reply: FastifyReply) {
+export async function createUrl(request: FastifyRequest, reply: FastifyReply) {
   const createUrlBodySchema = z.object({
     originalUrl: z.string().url(),
     shortenedUrl: z.string().url(),
