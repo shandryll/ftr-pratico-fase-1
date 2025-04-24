@@ -6,4 +6,5 @@ export interface IUrlsRepository {
   fetchUrls(): Promise<Url[]>
   create(data: Prisma.UrlCreateInput): Promise<Url>
   delete(urlId: string): Promise<void>
+  updateUrlAccessCounter(urlId: string): Promise<void>
 }

@@ -48,4 +48,17 @@ export class PrismaUrlsRepository implements IUrlsRepository {
       },
     })
   }
+
+  async updateUrlAccessCounter(urlId: string) {
+    await prisma.url.update({
+      where: {
+        id: urlId,
+      },
+      data: {
+        urlAccessCounter: {
+          increment: 1,
+        },
+      },
+    })
+  }
 }

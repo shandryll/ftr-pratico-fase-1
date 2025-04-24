@@ -53,4 +53,14 @@ export class InMemoryUrlsRepository implements IUrlsRepository {
 
     this.urls.splice(urlIndex, 1)
   }
+
+  async updateUrlAccessCounter(urlId: string) {
+    const url = this.urls.find(url => url.id === urlId)
+
+    if (!url) {
+      throw new ResourceNotFoundError()
+    }
+
+    url.urlAccessCounter += 1
+  }
 }
