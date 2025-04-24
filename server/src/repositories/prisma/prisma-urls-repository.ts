@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import type { Prisma } from '@prisma/client'
+import type { Prisma, Url } from '@prisma/client'
 import type { IUrlsRepository } from '../urls-repository'
 
 export class PrismaUrlsRepository implements IUrlsRepository {
@@ -21,6 +21,16 @@ export class PrismaUrlsRepository implements IUrlsRepository {
     })
 
     return url
+  }
+
+  async fetchUrls() {
+    const urls = await prisma.url.findMany({
+      orderBy: {
+        created_at: 'desc',
+      },
+    })
+
+    return urls
   }
 
   async create(data: Prisma.UrlCreateInput) {

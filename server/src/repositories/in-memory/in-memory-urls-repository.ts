@@ -26,6 +26,10 @@ export class InMemoryUrlsRepository implements IUrlsRepository {
     return url
   }
 
+  async fetchUrls() {
+    return this.urls
+  }
+
   async create(data: Prisma.UrlCreateInput) {
     const url = {
       id: randomUUID(),
