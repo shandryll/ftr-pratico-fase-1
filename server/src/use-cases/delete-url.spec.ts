@@ -1,5 +1,4 @@
 import { InMemoryUrlsRepository } from '@/repositories/in-memory/in-memory-urls-repository'
-import { Url } from '@prisma/client'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUrlUseCase } from './create-url'
 import { DeleteUrlUseCase } from './delete-url'

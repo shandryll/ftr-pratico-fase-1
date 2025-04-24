@@ -1,14 +1,15 @@
+import { logger } from '@/log/logger'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { makeDeleteUrlUseCase } from '@/use-cases/factories/make-delete-url-use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function deleteUrl(request: FastifyRequest, reply: FastifyReply) {
-  const createUrlBodySchema = z.object({
+  const deleteUrlParamsSchema = z.object({
     id: z.string().uuid(),
   })
 
-  const { id } = createUrlBodySchema.parse(request.params)
+  const { id } = deleteUrlParamsSchema.parse(request.params)
 
   try {
     const deleteUseCase = makeDeleteUrlUseCase()
@@ -19,6 +20,7 @@ export async function deleteUrl(request: FastifyRequest, reply: FastifyReply) {
       return reply.status(404).send({ message: err.message })
     }
 
+    logger.error(err)
     throw err
   }
 

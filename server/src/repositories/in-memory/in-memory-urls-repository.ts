@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import type { Prisma, Url } from '@prisma/client'
 import type { IUrlsRepository } from '../urls-repository'
 
@@ -43,7 +44,7 @@ export class InMemoryUrlsRepository implements IUrlsRepository {
     const urlIndex = this.urls.findIndex(url => url.id === urlId)
 
     if (urlIndex === -1) {
-      return null
+      throw new ResourceNotFoundError()
     }
 
     this.urls.splice(urlIndex, 1)

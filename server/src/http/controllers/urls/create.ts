@@ -1,3 +1,4 @@
+import { logger } from '@/log/logger'
 import { InvalidUrlFormatError } from '@/use-cases/errors/invalid-url-format-error'
 import { UrlAlreadyExistsError } from '@/use-cases/errors/url-already-exists-error'
 import { makeCreateUrlUseCase } from '@/use-cases/factories/make-create-url-use-case'
@@ -25,6 +26,7 @@ export async function createUrl(request: FastifyRequest, reply: FastifyReply) {
       return reply.status(409).send({ message: err.message })
     }
 
+    logger.error(err)
     throw err
   }
 
