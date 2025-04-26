@@ -1,4 +1,4 @@
-name: Pulumi - CI
+name: Pulumi - Deploy Infra
 
 on:
   push:
@@ -11,29 +11,30 @@ jobs:
     defaults:
       run:
         working-directory: infra
+
     steps:
-      - name: Checkout
+      - name: 📦 Project checkout
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Install node
+      - name: 🔧 Install node
         id: install-node
         uses: actions/setup-node@v4
         with:
           node-version-file: infra/package.json
 
-      - name: Install pnpm
+      - name: 🟢 Install pnpm
         id: install-pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 8
 
-      - name: Install dependencies
+      - name: 📥 Install dependencies
         id: install-dependencies
         run: |
           pnpm install
 
-      - name: Configure AWS Credentials
+      - name: 🔐 Configure AWS Credentials
         id: configure-aws-credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
