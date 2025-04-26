@@ -47,6 +47,7 @@ jobs:
         uses: pulumi/actions@v6
         with:
           command: up
-          stack-name: shandryll/pulumi-iac/stg
+          stack-name: shandryll/stg
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          PULUMI_CONFIG_PASSPHRASE: ""
