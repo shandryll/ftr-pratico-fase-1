@@ -1,12 +1,14 @@
-name: Pulumi - Deploy Infra
+name: Pulumi Preview - PR Validation
 
 on:
-  push:
+  pull_request:
+    branches:
+      - master
     paths:
       - "infra/**"
 
 jobs:
-  deploy:
+  preview:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -46,7 +48,7 @@ jobs:
         id: run-pulumi
         uses: pulumi/actions@v6
         with:
-          command: up
+          command: preview
           stack-name: shandryll/brevly-iac/stg
           work-dir: infra
         env:
