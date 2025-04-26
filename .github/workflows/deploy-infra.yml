@@ -48,6 +48,6 @@ jobs:
         with:
           command: up
           stack-name: stg
-          cloud-url: s3://ftr-pulumi-state-shandryll
+          # cloud-url: s3://ftr-pulumi-state-shandryll
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
