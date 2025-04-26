@@ -6,3 +6,10 @@ const bucket = new aws.s3.BucketV2("brev-lv", {
     IAC: "true"
   }
 });
+
+const bkps = new aws.s3.BucketV2("bkp-brev-lv", {
+  bucket: 'bkp-brev-lv',
+  tags: {
+    IAC: "true"
+  }
+});

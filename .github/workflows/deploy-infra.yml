@@ -44,8 +44,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: 🚀 Run Pulumi
-        id: run-pulumi
+      - name: 🚀 Run Pulumi Up
+        id: run-pulumi-up
         uses: pulumi/actions@v6
         with:
           command: up
