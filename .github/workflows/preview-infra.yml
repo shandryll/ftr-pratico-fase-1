@@ -1,4 +1,4 @@
-name: Pulumi Preview - PR Validation
+name: Pulumi - Preview & Cost Estimate
 
 on:
   pull_request:
@@ -6,6 +6,10 @@ on:
       - master
     paths:
       - "infra/**"
+
+permissions:
+  pull-requests: write
+  contents: read
 
 jobs:
   preview:
@@ -44,8 +48,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: 🚀 Run Pulumi
-        id: run-pulumi
+      - name: 🔍 Run Pulumi Preview
+        id: run-pulumi-preview
         uses: pulumi/actions@v6
         with:
           command: preview
@@ -53,3 +57,32 @@ jobs:
           work-dir: infra
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - name: ⬇️ Install Infracost
+        id: install-infracost
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
+          echo "$HOME/.infracost/bin" >> $GITHUB_PATH
+
+      - name: 💰 Estimate Costs
+        id: estimate-costs
+        run: |
+          infracost breakdown \
+            --path=pulumi-preview.json \
+            --usage-file=../infracost-usage.yml \
+            --format=json \
+            --out-file=infracost-output.json
+        env:
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+
+      - name: 💬 Post Infracost comment
+        id: post-infracost-comment
+        run: |
+          infracost comment github \
+            --path=infracost-output.json \
+            --repo=${{ github.repository }} \
+            --github-token=${{ secrets.GITHUB_TOKEN }} \
+            --pull-request=${{ github.event.pull_request.number }} \
+            --behavior=update
+        env:
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
