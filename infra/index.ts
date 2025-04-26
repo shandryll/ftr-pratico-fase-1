@@ -6,6 +6,3 @@ const bucket = new aws.s3.BucketV2("brev-lv", {
     IAC: "true"
   }
 });
-
-export const bucketName = bucket.id;
-export const bucketInfo = bucket.bucket;
