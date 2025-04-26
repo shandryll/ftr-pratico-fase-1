@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: infra
+        working-directory: ./infra
 
     steps:
       - name: 📦 Project checkout
@@ -48,6 +48,6 @@ jobs:
         with:
           command: up
           stack-name: shandryll/brevly-iac/stg
-          work-dir: infra
+          work-dir: ./infra
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
