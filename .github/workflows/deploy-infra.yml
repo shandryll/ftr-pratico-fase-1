@@ -21,7 +21,7 @@ jobs:
         id: install-node
         uses: actions/setup-node@v4
         with:
-          node-version-file: infra/package.json
+          node-version: 18
 
       - name: 🟢 Install pnpm
         id: install-pnpm
@@ -47,6 +47,6 @@ jobs:
         uses: pulumi/actions@v6
         with:
           command: up
-          stack-name: shandryll/pulumi-iac/stg
+          stack-name: stg
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
