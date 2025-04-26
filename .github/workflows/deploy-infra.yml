@@ -8,9 +8,6 @@ on:
 jobs:
   infra-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: infra
 
     steps:
       - name: 📦 Project checkout
@@ -32,6 +29,7 @@ jobs:
       - name: 📥 Install dependencies
         id: install-dependencies
         run: |
+          cd infra
           pnpm install
 
       - name: 🔐 Configure AWS Credentials
