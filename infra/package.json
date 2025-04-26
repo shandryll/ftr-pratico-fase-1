@@ -1,8 +1,8 @@
 {
-    "name": "pulumi-iac",
+    "name": "brevly-iac",
     "main": "index.ts",
     "devDependencies": {
-        "@types/node": "22.15.0",
+        "@types/node": "^18",
         "typescript": "^5.0.0"
     },
     "dependencies": {

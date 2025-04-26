@@ -1,5 +1,5 @@
-name: pulumi-iac
-description: IAC Project to Brev.ly
+name: brevly-iac
+description: IAC project to Brev.ly
 runtime:
   name: nodejs
   options:
