@@ -1,20 +1,20 @@
 import { InMemoryUrlsRepository } from '@/repositories/in-memory/in-memory-urls-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUrlUseCase } from './create-url'
-import { FetchUrlsUseCase } from './fetch-urls'
+import { TransformDataFromUrlsToCSVUseCase } from './transform-data-from-urls-to-csv'
 
 let sutRepository: InMemoryUrlsRepository
-let sut: FetchUrlsUseCase
+let sut: TransformDataFromUrlsToCSVUseCase
 let createUrl: CreateUrlUseCase
 
-describe('Fetch Urls Use Case', () => {
+describe('Transform Data from Urls to CSV Use Case', () => {
   beforeEach(() => {
     sutRepository = new InMemoryUrlsRepository()
-    sut = new FetchUrlsUseCase(sutRepository)
+    sut = new TransformDataFromUrlsToCSVUseCase(sutRepository)
     createUrl = new CreateUrlUseCase(sutRepository)
   })
 
-  it('should be able to list all registered urls', async () => {
+  it('should be able to transform the url data into csv', async () => {
     await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
       shortenedUrl: 'http://brev.ly/shandryll',
@@ -25,14 +25,10 @@ describe('Fetch Urls Use Case', () => {
       shortenedUrl: 'http://brev.ly/ftr',
     })
 
-    const { urls } = await sut.execute()
+    const csv = await sut.execute()
 
-    expect(urls).toHaveLength(2)
-  })
-
-  it('should be able to list all urls even without data', async () => {
-    const { urls } = await sut.execute()
-
-    expect(urls).toHaveLength(0)
+    expect(csv).toContain('URL original,URL encurtada,Contagem de acessos,Data de criação')
+    expect(csv).toContain('http://www.google.com/shandryll,http://brev.ly/shandryll')
+    expect(csv).toContain('http://www.google.com/ftr,http://brev.ly/ftr')
   })
 })

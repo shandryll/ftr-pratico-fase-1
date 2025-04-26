@@ -4,6 +4,9 @@ import type { Prisma, Url } from '@prisma/client'
 import type { IUrlsRepository } from '../urls-repository'
 
 export class InMemoryUrlsRepository implements IUrlsRepository {
+  exportUrlsToCSV(): Promise<string> {
+    throw new Error('Method not implemented.')
+  }
   public urls: Url[] = []
 
   async findById(urlId: string) {

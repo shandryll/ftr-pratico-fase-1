@@ -3,17 +3,19 @@
   "display": "Node 23",
   "_version": "23.0.0",
   "compilerOptions": {
-    "lib": [
-      "es2024"
-    ],
-    "module": "ESNext",
-    "target": "ESNext",
+    "lib": ["es2024"],
+    "module": "NodeNext",
+    "target": "es2024",
+
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "nodenext",
+
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "moduleResolution": "bundler",
+
     "paths": {
       "@/*": ["./src/*"]
     }
