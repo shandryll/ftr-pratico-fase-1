@@ -65,18 +65,17 @@ jobs:
         run: |
           infracost breakdown \
             --path=pulumi-preview.json \
-            --usage-file=../infracost-usage.yml \
             --format=json \
             --out-file=infracost-output.json
         env:
           INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
 
-      - name: ✍🏻 Post Infracost comment
+      - name: 💬 Post Infracost comment
         id: post-infracost-comment
         run: |
           infracost comment github \
             --path=infracost-output.json \
-            --repo=$GITHUB_REPOSITORY \
+            --repo=${{ github.repository }} \
             --github-token=${{ secrets.GITHUB_TOKEN }} \
             --pull-request=${{ github.event.pull_request.number }} \
             --behavior=update
