@@ -7,7 +7,14 @@ const bucket = new aws.s3.BucketV2("brev-lv", {
   }
 });
 
-const bkpsss = new aws.s3.BucketV2("bkp-brev-lv", {
+const bkpsss = new aws.s3.BucketV2("bkpsss-brev-lv", {
+  bucket: 'bkpsss-brev-lv',
+  tags: {
+    IAC: "true"
+  }
+});
+
+const bkp = new aws.s3.BucketV2("bkp-brev-lv", {
   bucket: 'bkp-brev-lv',
   tags: {
     IAC: "true"
