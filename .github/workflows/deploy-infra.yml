@@ -2,6 +2,8 @@ name: Pulumi - Deploy Infra
 
 on:
   push:
+    branches:
+      - master
     paths:
       - "infra/**"
 
