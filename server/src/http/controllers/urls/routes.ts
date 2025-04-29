@@ -12,7 +12,7 @@ export const urlsRoutes = async (app: FastifyInstance) => {
   app.get('/', fetchUrls)
   app.get('/filter/:shortenedUrl', getOriginalUrl)
   app.get('/export', exportUrls)
-  app.get('/download/:file', downloadCSV)
+  app.post('/download', downloadCSV)
   app.patch('/:id', updateUrlAccessCounter)
   app.delete('/:id', deleteUrl)
 }

@@ -3,6 +3,7 @@ import { env } from '@/env'
 import { s3 } from '@/lib/s3'
 import { logger } from '@/log/logger'
 import { makeExportUrlsUseCase } from '@/use-cases/factories/make-export-urls-use-case'
+import { NoContentResponse } from '@/use-cases/responses/no-content-response'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
@@ -12,8 +13,8 @@ export async function exportUrls(request: FastifyRequest, reply: FastifyReply) {
 
     const csvUrls = await exportUrls.execute()
 
-    if (!csvUrls) {
-      return reply.status(204).send()
+    if (csvUrls instanceof NoContentResponse) {
+      return reply.status(204).send({ message: csvUrls.message })
     }
 
     const filename = `exports/urls-${Date.now()}_${randomUUID()}.csv`

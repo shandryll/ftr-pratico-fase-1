@@ -1,15 +1,17 @@
 import type { IUrlsRepository } from '@/repositories/urls-repository'
+import { transformDateInCSV } from '@/utils/dates'
 import { databaseTableNameToCSV } from '@/utils/handlerDatabaseTableNameToCSV'
 import { stringify } from 'csv-stringify/sync'
+import { NoContentResponse } from './responses/no-content-response'
 
 export class ExportUrlsUseCase {
   constructor(private urlsRepository: IUrlsRepository) {}
 
-  async execute(): Promise<string> {
+  async execute(): Promise<string | NoContentResponse> {
     const urls = await this.urlsRepository.fetchUrls()
 
     if (urls.length === 0) {
-      return ''
+      return new NoContentResponse()
     }
 
     const csv = stringify(urls, {
@@ -17,6 +19,9 @@ export class ExportUrlsUseCase {
       header: true,
       columns: databaseTableNameToCSV,
     })
-    return csv
+
+    const transformedCSV = transformDateInCSV(csv)
+
+    return transformedCSV
   }
 }
