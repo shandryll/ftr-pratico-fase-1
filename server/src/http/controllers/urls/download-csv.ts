@@ -1,4 +1,3 @@
-import { URL } from 'node:url'
 import { env } from '@/env'
 import { s3 } from '@/lib/s3'
 import { logger } from '@/log/logger'
@@ -8,18 +7,12 @@ import { z } from 'zod'
 
 export async function downloadCSV(request: FastifyRequest, reply: FastifyReply) {
   const downloadCSVBodySchema = z.object({
-    url: z.string().url(),
+    key: z.string().min(1),
   })
 
-  const { url } = downloadCSVBodySchema.parse(request.body)
-  if (!url) {
-    return reply.status(400).send({ message: 'File parameter is required.' })
-  }
+  const { key } = downloadCSVBodySchema.parse(request.query)
 
   try {
-    const parsedUrl = new URL(url)
-    const key = decodeURIComponent(parsedUrl.pathname.replace(/^\/+/, ''))
-
     const command = new GetObjectCommand({
       Bucket: env.BUCKET_NAME,
       Key: key,

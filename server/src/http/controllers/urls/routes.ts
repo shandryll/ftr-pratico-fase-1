@@ -10,9 +10,9 @@ import { updateUrlAccessCounter } from './update-url-access-counter'
 export const urlsRoutes = async (app: FastifyInstance) => {
   app.post('/', createUrl)
   app.get('/', fetchUrls)
-  app.get('/filter/:shortenedUrl', getOriginalUrl)
+  app.get('/filter', getOriginalUrl)
   app.get('/export', exportUrls)
-  app.post('/download', downloadCSV)
+  app.get('/download', downloadCSV)
   app.patch('/:id', updateUrlAccessCounter)
   app.delete('/:id', deleteUrl)
 }

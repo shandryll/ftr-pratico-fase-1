@@ -31,11 +31,9 @@ export async function exportUrls(request: FastifyRequest, reply: FastifyReply) {
       })
     )
 
-    const publicUrl = `https://${env.BUCKET_NAME}.s3.amazonaws.com/${filename}`
-
     logger.info('CSV uploaded to S3 successfully!')
 
-    return reply.status(200).send({ url: publicUrl })
+    return reply.status(200).send({ key: filename })
   } catch (err) {
     logger.error(err)
     throw err
