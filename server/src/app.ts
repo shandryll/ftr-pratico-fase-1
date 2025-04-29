@@ -1,7 +1,5 @@
 import { logger } from '@/log/logger'
 import { fastifyCors } from '@fastify/cors'
-import fastifySwagger from '@fastify/swagger'
-import scalarUI from '@scalar/fastify-api-reference'
 import { fastify } from 'fastify'
 import {
   hasZodFastifySchemaValidationErrors,

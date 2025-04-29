@@ -1,16 +1,16 @@
 import { InMemoryUrlsRepository } from '@/repositories/in-memory/in-memory-urls-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUrlUseCase } from './create-url'
-import { TransformDataFromUrlsToCSVUseCase } from './transform-data-from-urls-to-csv'
+import { ExportUrlsUseCase } from './export-urls'
 
 let sutRepository: InMemoryUrlsRepository
-let sut: TransformDataFromUrlsToCSVUseCase
+let sut: ExportUrlsUseCase
 let createUrl: CreateUrlUseCase
 
 describe('Transform Data from Urls to CSV Use Case', () => {
   beforeEach(() => {
     sutRepository = new InMemoryUrlsRepository()
-    sut = new TransformDataFromUrlsToCSVUseCase(sutRepository)
+    sut = new ExportUrlsUseCase(sutRepository)
     createUrl = new CreateUrlUseCase(sutRepository)
   })
 

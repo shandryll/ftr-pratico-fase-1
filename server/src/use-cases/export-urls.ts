@@ -2,7 +2,7 @@ import type { IUrlsRepository } from '@/repositories/urls-repository'
 import { databaseTableNameToCSV } from '@/utils/handlerDatabaseTableNameToCSV'
 import { stringify } from 'csv-stringify/sync'
 
-export class TransformDataFromUrlsToCSVUseCase {
+export class ExportUrlsUseCase {
   constructor(private urlsRepository: IUrlsRepository) {}
 
   async execute(): Promise<string> {
@@ -12,7 +12,11 @@ export class TransformDataFromUrlsToCSVUseCase {
       return ''
     }
 
-    const csv = stringify(urls, { header: true, columns: databaseTableNameToCSV })
+    const csv = stringify(urls, {
+      delimiter: ',',
+      header: true,
+      columns: databaseTableNameToCSV,
+    })
     return csv
   }
 }
