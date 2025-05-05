@@ -43,11 +43,46 @@ export function MyLinks() {
     setLinks(prevLinks => prevLinks.filter(link => link.id !== id))
   }
 
+  const handleExportCSV = async () => {
+    try {
+      setIsLoading(true)
+
+      const { data } = await api.get("/export")
+      const s3AWSKey = data.key
+
+      const response = await api.get(`/download?key=${s3AWSKey}`, {
+        responseType: "blob",
+      })
+
+      const filename = s3AWSKey.split("/").pop() ?? "meus-links.csv"
+
+      const blob = new Blob([response.data], { type: "text/csv" })
+      const downloadUrl = window.URL.createObjectURL(blob)
+
+      const link = document.createElement("a")
+      link.href = downloadUrl
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+
+      toast.success("CSV exportado com sucesso!")
+    } catch (error) {
+      toast.error("Erro ao exportar CSV.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px] max-sm:w-screen max-sm:h-screen">
       <div className="mb-[20px] flex flex-row justify-between">
         <h1 className="text-lg text-gray-600 font-bold">Meus links</h1>
-        <ButtonDownloadCSV disabled={isLoading || isMyLinkListEmpty}>
+        <ButtonDownloadCSV
+          onClick={handleExportCSV}
+          disabled={isMyLinkListEmpty}
+          isLoading={isLoading}
+        >
           Baixar CSV
         </ButtonDownloadCSV>
       </div>

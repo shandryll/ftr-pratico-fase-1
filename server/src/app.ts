@@ -25,6 +25,9 @@ app.setErrorHandler((error, _, reply) => {
   return reply.status(500).send({ message: 'Internal server error.' })
 })
 
-app.register(fastifyCors, { origin: '*' })
+app.register(fastifyCors, {
+  origin: '*',
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+})
 
 app.register(urlsRoutes, { prefix: '/v1/urls' })
