@@ -60,6 +60,7 @@ export function CreateLink() {
           placeholder="https://www.exemplo.com.br"
           {...register("originalUrl")}
           label="link original"
+          error={errors.originalUrl?.message}
         />
 
         <TextInput
@@ -67,6 +68,7 @@ export function CreateLink() {
           {...register("shortenedUrl")}
           label="link encurtado"
           className="text-gray-400"
+          error={errors.shortenedUrl?.message}
         />
 
         <Button type="submit" className="text-md text-white">
