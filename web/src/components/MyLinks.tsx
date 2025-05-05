@@ -5,6 +5,7 @@ import { LinkCard } from "./commons/LinkCard"
 import { api } from "../lib/axios"
 import { toast } from "react-toastify"
 import { LinkData } from "../pages/Home"
+import { useNavigate } from "react-router-dom"
 
 interface MyLinksProps {
   links: LinkData[]
@@ -15,6 +16,7 @@ interface MyLinksProps {
 
 export function MyLinks({ links, setLinks, isLoading, setIsLoading }: MyLinksProps) {
   const isMyLinkListEmpty = !isLoading && links.length === 0
+  const navigate = useNavigate()
 
   const handleLinkDelete = (id: string) => {
     setLinks(prevLinks => prevLinks.filter(link => link.id !== id))
@@ -51,6 +53,10 @@ export function MyLinks({ links, setLinks, isLoading, setIsLoading }: MyLinksPro
     }
   }
 
+  const handleLinkClick = (shortenedUrl: string) => {
+    navigate(`/r/${shortenedUrl}`)
+  }
+
   return (
     <div className="bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px] max-sm:w-screen max-sm:h-screen">
       <div className="mb-[20px] flex flex-row justify-between">
@@ -77,7 +83,7 @@ export function MyLinks({ links, setLinks, isLoading, setIsLoading }: MyLinksPro
               <div className="flex flex-col items-center justify-center mt-10">
                 <Link size={32} className="text-gray-400" />
                 <span className="text-xs text-gray-500 uppercase mt-3">
-                  ainda não existem links cadastrados
+                  Ainda não existem links cadastrados
                 </span>
               </div>
             </div>
@@ -91,6 +97,7 @@ export function MyLinks({ links, setLinks, isLoading, setIsLoading }: MyLinksPro
                   originalUrl={link.originalUrl}
                   urlAccessCounter={link.urlAccessCounter}
                   onDelete={handleLinkDelete}
+                  onRegisterClick={() => handleLinkClick(link.shortenedUrl)}
                 />
               ))}
             </div>

@@ -35,7 +35,7 @@ export function CreateLink({ onLinkCreated }: CreateLinkProps) {
       toast.success("Link salvo com sucesso!")
       reset({
         originalUrl: "",
-        shortenedUrl: "https://brev.ly/",
+        shortenedUrl: "brev.ly/",
       })
 
       onLinkCreated()
@@ -68,7 +68,7 @@ export function CreateLink({ onLinkCreated }: CreateLinkProps) {
         />
 
         <TextInput
-          defaultValue="https://brev.ly/"
+          defaultValue="brev.ly/"
           {...register("shortenedUrl")}
           label="link encurtado"
           className="text-gray-400"
