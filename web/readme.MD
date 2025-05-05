@@ -4,9 +4,9 @@ Assim como na API, temos as seguintes funcionalidades e regras:
     - [x]  Não deve ser possível criar um link com encurtamento mal formatado
     - [x]  Não deve ser possível criar um link com encurtamento já existente
 - [x]  Deve ser possível deletar um link
-- [ ]  Deve ser possível obter a URL original por meio do encurtamento
+- [X]  Deve ser possível obter a URL original por meio do encurtamento
 - [x]  Deve ser possível listar todas as URL’s cadastradas
-- [ ]  Deve ser possível incrementar a quantidade de acessos de um link
+- [X]  Deve ser possível incrementar a quantidade de acessos de um link
 - [ ]  Deve ser possível baixar um CSV com o relatório dos links criados
 
 Além disso, também temos algumas regras importantes específicas para o front-end:

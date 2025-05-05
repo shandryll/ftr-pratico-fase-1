@@ -10,7 +10,7 @@ import { AxiosError } from "axios"
 interface LinkData {
   originalUrl: string
   shortenedUrl: string
-  clicks: number
+  urlAccessCounter: number
   id: string
 }
 
@@ -77,7 +77,7 @@ export function MyLinks() {
                   id={link.id}
                   shortenedUrl={link.shortenedUrl}
                   originalUrl={link.originalUrl}
-                  clicks={link.clicks}
+                  urlAccessCounter={link.urlAccessCounter}
                   onDelete={handleLinkDelete}
                 />
               ))}

@@ -7,19 +7,30 @@ import { api } from "../../lib/axios"
 interface LinkCardProps {
   originalUrl: string
   shortenedUrl: string
-  clicks?: number
+  urlAccessCounter?: number
   id: string
   onDelete: (id: string) => void
+  onRegisterClick?: (id: string) => void
 }
 
 export function LinkCard({
   originalUrl,
   shortenedUrl,
-  clicks = 0,
+  urlAccessCounter = 0,
   id,
   onDelete,
 }: LinkCardProps) {
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleLinkClick = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    try {
+      await api.patch(`/${id}`)
+      window.open(originalUrl, '_blank', 'noopener,noreferrer')
+    } catch (error) {
+      console.error("Erro ao registrar acesso:", error)
+    }
+  }
 
   const handleDeleteClick = async () => {
     const isConfirmed = window.confirm("Você tem certeza que deseja excluir este link?")
@@ -41,13 +52,21 @@ export function LinkCard({
     <div className="flex flex-row justify-between border-t border-gray-200 py-4">
       <div className="flex flex-col items-center justify-center">
         <div className="flex flex-col items-start">
-          <span className="text-md text-blue-base font-semibold">{shortenedUrl}</span>
+          <a
+            href={originalUrl}
+            onClick={handleLinkClick}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-md text-blue-base font-semibold hover:underline"
+          >
+            {shortenedUrl}
+          </a>
           <span className="text-sm text-gray-500">{originalUrl}</span>
         </div>
       </div>
 
       <div className="flex flex-row items-center mr-4">
-        <span className="text-sm text-gray-500 px-5">{clicks} acessos</span>
+        <span className="text-sm text-gray-500 px-5">{urlAccessCounter} acessos</span>
         <button
           className={cn(
             `gap-8 p-3 bg-gray-200 rounded-lg mx-1.5
