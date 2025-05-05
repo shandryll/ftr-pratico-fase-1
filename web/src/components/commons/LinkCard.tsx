@@ -10,7 +10,6 @@ interface LinkCardProps {
   urlAccessCounter?: number
   id: string
   onDelete: (id: string) => void
-  onRegisterClick?: (id: string) => void
 }
 
 export function LinkCard({
@@ -21,23 +20,17 @@ export function LinkCard({
   onDelete,
 }: LinkCardProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [accessCounter, setAccessCounter] = useState(urlAccessCounter)
 
   const handleLinkClick = async (e: React.MouseEvent) => {
     e.preventDefault()
     try {
       await api.patch(`/${id}`)
+      setAccessCounter((prev) => prev + 1) // Atualiza contador local
       window.open(originalUrl, '_blank', 'noopener,noreferrer')
     } catch (error) {
       console.error("Erro ao registrar acesso:", error)
-    }
-  }
-
-  const handleCopyClick = async () => {
-    try {
-      await navigator.clipboard.writeText(shortenedUrl)
-      toast.success("Link copiado com sucesso!")
-    } catch (error) {
-      toast.error("Erro ao copiar o link.")
+      toast.error("Erro ao registrar acesso ao link.")
     }
   }
 
@@ -54,6 +47,15 @@ export function LinkCard({
       } finally {
         setIsLoading(false)
       }
+    }
+  }
+
+  const handleCopyClick = async () => {
+    try {
+      await navigator.clipboard.writeText(shortenedUrl)
+      toast.success("Link copiado com sucesso!")
+    } catch (error) {
+      toast.error("Erro ao copiar o link.")
     }
   }
 
@@ -75,7 +77,10 @@ export function LinkCard({
       </div>
 
       <div className="flex flex-row items-center mr-4">
-        <span className="text-sm text-gray-500 px-5">{urlAccessCounter} acessos</span>
+        <span className="text-sm text-gray-500 px-5">
+          {accessCounter} acessos
+        </span>
+
         <button
           onClick={handleCopyClick}
           className={cn(
@@ -86,13 +91,14 @@ export function LinkCard({
         >
           <Copy size={16} />
         </button>
+
         <button
+          onClick={handleDeleteClick}
           className={cn(
             `gap-8 p-3 bg-gray-200 rounded-lg
             border-2 hover:border-blue-base
             disabled:opacity-50 disabled:pointer-events-none`
           )}
-          onClick={handleDeleteClick}
           disabled={isLoading}
         >
           {isLoading ? <span>Carregando...</span> : <Trash2 size={16} />}
