@@ -3,8 +3,8 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
-import Button from "./ui/Button";
-import TextInput from "./ui/TextInput";
+import Button from "./ui/Button"
+import TextInput from "./ui/TextInput"
 import { api } from "../lib/axios"
 import { AxiosError } from "axios"
 
@@ -15,7 +15,11 @@ const linkSchema = z.object({
 
 type LinkData = z.infer<typeof linkSchema>
 
-export function CreateLink() {
+interface CreateLinkProps {
+  onLinkCreated: () => void
+}
+
+export function CreateLink({ onLinkCreated }: CreateLinkProps) {
   const {
     register,
     handleSubmit,
@@ -33,13 +37,13 @@ export function CreateLink() {
         originalUrl: "",
         shortenedUrl: "https://brev.ly/",
       })
-      console.log(data)
-    }
-    catch (err) {
+
+      onLinkCreated()
+    } catch (err) {
       if (err instanceof AxiosError) {
-        toast.error(err.response?.data.message || "Erro desconhecido.");
+        toast.error(err.response?.data.message || "Erro desconhecido.")
       } else {
-        toast.error("Erro ao tentar se conectar ao servidor.");
+        toast.error("Erro ao tentar se conectar ao servidor.")
       }
     }
   }

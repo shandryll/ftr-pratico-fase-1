@@ -1,42 +1,19 @@
-import { useEffect, useState } from "react"
 import { Link } from "lucide-react"
 import * as ScrollArea from "@radix-ui/react-scroll-area"
 import ButtonDownloadCSV from "./ui/ButtonDownloadCSV"
 import { LinkCard } from "./commons/LinkCard"
 import { api } from "../lib/axios"
 import { toast } from "react-toastify"
-import { AxiosError } from "axios"
+import { LinkData } from "../pages/Home"
 
-interface LinkData {
-  originalUrl: string
-  shortenedUrl: string
-  urlAccessCounter: number
-  id: string
+interface MyLinksProps {
+  links: LinkData[]
+  setLinks: React.Dispatch<React.SetStateAction<LinkData[]>>
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function MyLinks() {
-  const [links, setLinks] = useState<LinkData[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    async function fetchLinks() {
-      try {
-        const response = await api.get("/")
-        setLinks(response.data.urls || response.data)
-      } catch (err) {
-        if (err instanceof AxiosError) {
-          toast.error(err.response?.data.message || "Erro desconhecido.")
-        } else {
-          toast.error("Erro ao tentar se conectar ao servidor.")
-        }
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchLinks()
-  }, [])
-
+export function MyLinks({ links, setLinks, isLoading, setIsLoading }: MyLinksProps) {
   const isMyLinkListEmpty = !isLoading && links.length === 0
 
   const handleLinkDelete = (id: string) => {
