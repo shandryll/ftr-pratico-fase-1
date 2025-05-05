@@ -16,7 +16,7 @@ describe('Create Url Use Case', () => {
   it('should be able to create an url', async () => {
     const { url } = await sut.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     expect(url.id).toEqual(expect.any(String))
@@ -27,7 +27,7 @@ describe('Create Url Use Case', () => {
       async () =>
         await sut.execute({
           originalUrl: 'http://www.google.com/shandryll',
-          shortenedUrl: 'http://br&v.ly/$h@ndry11',
+          shortenedUrl: '$h@ndry11',
         })
     ).rejects.toBeInstanceOf(InvalidUrlFormatError)
   })
@@ -35,14 +35,14 @@ describe('Create Url Use Case', () => {
   it('should not be able to create an url with an already existing shortened URL', async () => {
     await sut.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     await expect(
       async () =>
         await sut.execute({
           originalUrl: 'http://www.google.com/shandryll',
-          shortenedUrl: 'http://brev.ly/shandryll',
+          shortenedUrl: 'shandryll',
         })
     ).rejects.toBeInstanceOf(UrlAlreadyExistsError)
   })

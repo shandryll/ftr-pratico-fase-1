@@ -1,7 +1,6 @@
 import { InMemoryUrlsRepository } from '@/repositories/in-memory/in-memory-urls-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUrlUseCase } from './create-url'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { UpdateUrlAccessCounterUseCase } from './update-url-access-counter'
 
 let sutRepository: InMemoryUrlsRepository
@@ -18,7 +17,7 @@ describe('Update Url Access Counter Use Case', () => {
   it('should be able to increase the counter of access on an url', async () => {
     const { url } = await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     expect(url.urlAccessCounter).toEqual(0)

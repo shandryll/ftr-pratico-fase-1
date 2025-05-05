@@ -1,5 +1,5 @@
 import type { IUrlsRepository } from '@/repositories/urls-repository'
-import { isValidUrlFormat } from '@/utils/validadeUrlFormat'
+import { isValidStringFormat } from '@/utils/validadeStringFormat'
 import type { Url } from '@prisma/client'
 import { InvalidUrlFormatError } from './errors/invalid-url-format-error'
 import { UrlAlreadyExistsError } from './errors/url-already-exists-error'
@@ -20,9 +20,9 @@ export class CreateUrlUseCase {
     originalUrl,
     shortenedUrl,
   }: CreateUrlUseCaseResquest): Promise<CreateUrlUseCaseResponse> {
-    const isInvalidUrlFormat = isValidUrlFormat(shortenedUrl)
+    const isInvalidStringFormat = isValidStringFormat(shortenedUrl)
 
-    if (!isInvalidUrlFormat.success) {
+    if (!isInvalidStringFormat.success) {
       throw new InvalidUrlFormatError()
     }
 

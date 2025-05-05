@@ -17,18 +17,18 @@ describe('Transform Data from Urls to CSV Use Case', () => {
   it('should be able to transform the url data into csv', async () => {
     await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     await createUrl.execute({
       originalUrl: 'http://www.google.com/ftr',
-      shortenedUrl: 'http://brev.ly/ftr',
+      shortenedUrl: 'ftr',
     })
 
     const csv = await sut.execute()
 
     expect(csv).toContain('URL original,URL encurtada,Contagem de acessos,Data de criação')
-    expect(csv).toContain('http://www.google.com/shandryll,http://brev.ly/shandryll')
-    expect(csv).toContain('http://www.google.com/ftr,http://brev.ly/ftr')
+    expect(csv).toContain('http://www.google.com/shandryll,shandryll')
+    expect(csv).toContain('http://www.google.com/ftr,ftr')
   })
 })

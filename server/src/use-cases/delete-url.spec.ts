@@ -20,7 +20,7 @@ describe('Delete Url Use Case', () => {
 
     const { url } = await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     await sut.execute({ urlId: url.id })

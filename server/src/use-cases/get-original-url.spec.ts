@@ -18,28 +18,28 @@ describe('Get Original Url Use Case', () => {
   it('should be able to get the original url using a shortened url', async () => {
     await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     const { url } = await sut.execute({
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     expect(url.id).toEqual(expect.any(String))
     expect(url.originalUrl).toEqual('http://www.google.com/shandryll')
-    expect(url.shortenedUrl).toEqual('http://brev.ly/shandryll')
+    expect(url.shortenedUrl).toEqual('shandryll')
   })
 
   it('should not be able to get the original url using a shortened url that does not exist', async () => {
     await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     await expect(
       async () =>
         await sut.execute({
-          shortenedUrl: 'http://brev.ly/not-found',
+          shortenedUrl: 'not-found',
         })
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })

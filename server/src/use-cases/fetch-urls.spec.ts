@@ -17,12 +17,12 @@ describe('Fetch Urls Use Case', () => {
   it('should be able to list all registered urls', async () => {
     await createUrl.execute({
       originalUrl: 'http://www.google.com/shandryll',
-      shortenedUrl: 'http://brev.ly/shandryll',
+      shortenedUrl: 'shandryll',
     })
 
     await createUrl.execute({
       originalUrl: 'http://www.google.com/ftr',
-      shortenedUrl: 'http://brev.ly/ftr',
+      shortenedUrl: 'ftr',
     })
 
     const { urls } = await sut.execute()
