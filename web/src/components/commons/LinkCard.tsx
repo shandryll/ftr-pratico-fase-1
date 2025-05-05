@@ -32,6 +32,15 @@ export function LinkCard({
     }
   }
 
+  const handleCopyClick = async () => {
+    try {
+      await navigator.clipboard.writeText(shortenedUrl)
+      toast.success("Link copiado com sucesso!")
+    } catch (error) {
+      toast.error("Erro ao copiar o link.")
+    }
+  }
+
   const handleDeleteClick = async () => {
     const isConfirmed = window.confirm("Você tem certeza que deseja excluir este link?")
     if (isConfirmed) {
@@ -68,6 +77,7 @@ export function LinkCard({
       <div className="flex flex-row items-center mr-4">
         <span className="text-sm text-gray-500 px-5">{urlAccessCounter} acessos</span>
         <button
+          onClick={handleCopyClick}
           className={cn(
             `gap-8 p-3 bg-gray-200 rounded-lg mx-1.5
             border-2 hover:border-blue-base
