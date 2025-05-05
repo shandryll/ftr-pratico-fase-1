@@ -11,6 +11,7 @@ interface LinkData {
   originalUrl: string
   shortenedUrl: string
   clicks: number
+  id: string
 }
 
 export function MyLinks() {
@@ -29,7 +30,7 @@ export function MyLinks() {
           toast.error("Erro ao tentar se conectar ao servidor.")
         }
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
     }
 
@@ -37,6 +38,10 @@ export function MyLinks() {
   }, [])
 
   const isMyLinkListEmpty = !isLoading && links.length === 0
+
+  const handleLinkDelete = (id: string) => {
+    setLinks(prevLinks => prevLinks.filter(link => link.id !== id))
+  }
 
   return (
     <div className="bg-gray-100 flex flex-col p-[2rem] rounded-xl w-[580px] max-h-[396px] max-sm:w-screen max-sm:h-screen">
@@ -66,12 +71,14 @@ export function MyLinks() {
             </div>
           ) : (
             <div className="flex flex-col">
-              {links.map((link, index) => (
+              {links.map((link) => (
                 <LinkCard
-                  key={index}
+                  key={link.id}
+                  id={link.id}
                   shortenedUrl={link.shortenedUrl}
                   originalUrl={link.originalUrl}
                   clicks={link.clicks}
+                  onDelete={handleLinkDelete}
                 />
               ))}
             </div>
