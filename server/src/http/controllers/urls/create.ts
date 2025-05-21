@@ -8,7 +8,7 @@ import { z } from 'zod'
 export async function createUrl(request: FastifyRequest, reply: FastifyReply) {
   const createUrlBodySchema = z.object({
     originalUrl: z.string().url(),
-    shortenedUrl: z.string().url(),
+    shortenedUrl: z.string(),
   })
 
   const { originalUrl, shortenedUrl } = createUrlBodySchema.parse(request.body)

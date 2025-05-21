@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 export async function getOriginalUrl(request: FastifyRequest, reply: FastifyReply) {
   const getOriginalUrlQuerySchema = z.object({
-    shortenedUrl: z.string().url(),
+    shortenedUrl: z.string(),
   })
 
   const { shortenedUrl } = getOriginalUrlQuerySchema.parse(request.query)

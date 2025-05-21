@@ -56,12 +56,13 @@ export function LinkCard({
       <div className="flex flex-col items-center justify-center">
         <div className="flex flex-col items-start">
           <a
-            href="#"
+            href={`${window.location.origin}/${shortenedUrl}`}
             target="_blank"
+            rel="noopener noreferrer"
             onClick={handleLinkClick}
             className="text-md text-blue-base font-semibold hover:underline"
           >
-            {shortenedUrl}
+            {`${window.location.origin}/${shortenedUrl}`}
           </a>
           <span className="text-sm text-gray-500">{originalUrl}</span>
         </div>
